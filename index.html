@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Code Reengineering</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Code Reengineering</h1>
+        </header>
+        <main>
+            <article>
+                <h2>The Couplers</h2>
+                <p class="metadata">
+                    2602181276 - Mohammad Deryl Ihzacky
+                    <br>
+                    2602182783 - Thierry Zackly Phillip Lengkong 
+                    </p>
+                    <div class="containerfill">
+                        <ol>
+                            <li>
+                                <h3><b>Feature Envy</b></h3>
+                                <p>
+                                    Smell ini terjadi bila ada sebuah method yang lebih 
+                                    sering mengakses data class lain ketimbang class sendiri. 
+                                    Class sendiri pun menjadi ‘cemburu’. Bila hal ini terjadi, 
+                                    harus dipikirkan bagaimana cara mengusir method ini ke 
+                                    class lain tersebut.
+                                    <br><br>
+                                    
+                                    Example Code :
+                                    <br>
+                                    <img src="/image/unRefactoredFE.png" alt="feature envy">
+                                    <br><br>
+                                    
+                                    Treatment :
+                                    <br>
+                                    <img src="/image/refactoredFE.png" alt="feature envy">
+                                    <br><br>
+                                    
+                                    Dilakukan Move Method pada fungsi <code>isScored</code>. Perhatikan 
+                                    di package <code>after</code>, <code>isScored</code> dipindahkan ke 
+                                    class <code>Exam</code>.
+                                    
+                                    <br><br><br><br><br><br>
+                                </p>
+                            </li>
+                            <li>
+                                <h3><b>Inappropriate Intimacy</b></h3>
+                                <p>
+                                    Smell ini terjadi karena hubungan antar class yang terlalu intim, 
+                                    menyebabkan class yang satu mengeksploitasi internal field dan/atau 
+                                    method di class lain.
+                                    <br><br>
+
+                                    Example Code :
+                                    <br>
+                                    <img src="/image/unRefactoredII.png" alt="Inappropriate Intimacy">
+                                    <br><br>
+
+                                    Treatment :
+                                    <br>
+                                    Catalog dan Product punya hubungan bidirectional yang tidak perlu, 
+                                    maka dilakukan Change Bidirectional Association to Unidirectional. 
+                                    Dengan cara menghapus field <code>catalog</code> di dalam <code>Product</code>.
+                                    <br><br><br><br><br><br>
+                                </p>
+                            </li>
+                            <li>
+                                <h3><b>Message Chains</b></h3>
+                                <p>
+                                    Smell ini terjadi ketika ingin mengakses sebuah method, perlu dilakukan 
+                                    emanggilan dari hasil return method lainnya sehingga membentuk rantai: 
+                                    <code>obj.a().b().c().</code>
+                                    <br><br>
+
+                                    Example Code :
+                                    <br>
+                                    <img src="image/unRefactoredMC.png" alt="Messages Chains"> 
+                                    <br><br>  
+
+                                    Treatment :
+                                    <br>
+                                    <img src="image/RefactoredMC.png" alt="Messages Chains">
+                                    <br><br>
+                                    Dilakukan Hide Delegate. Perhatikan class BojekDriver dan Destination, 
+                                    telah ditambahkan fungsi <code>latitude()</code> dan <code>longitude()</code> 
+                                    yang sebenarnya melakukan delegasi chaining yang dilakukan di package before. 
+                                    Hal ini dilakukan agar class client tidak merasakan adanya chaining, disembunyikan 
+                                    di dalam sini.
+                                    <br><br><br><br><br><br>
+                                </p>
+                            </li>
+                            <li>
+                                <h3><b>Middle Man</b></h3>
+                                <p>
+                                    Middle Man adalah class yang isinya hanya delegasi saja, tidak ada behavior lain 
+                                    selain delegasi ke class lain.
+                                    <br><br>
+
+                                    Example Code :
+                                    <br>
+                                    <img src="image/unRefactoredMM.png" alt="Middle Man">
+                                    <br><br>
+
+                                    Treatment :
+                                    <br>
+                                    <img src="image/RefactoredMM.png" alt="Middle Man">
+                                    <br><br>
+                
+                                    Dengan menghapus class <code>Order</code>, kita menghilangkan perantara dan 
+                                    menyederhanakan kode. Kita sekarang dapat menggunakan kelas <code>OrderProcessor</code> 
+                                    secara langsung untuk memproses pesanan.
+                                    <br><br><br><br><br><br>
+                                </p>
+                            </li>
+                        </ol>
+                    </div>
+            </article>
+        </main>
+        <footer>
+            <p> Binus University</p>
+        </footer>
+    </div>
+</body>
+</html>
